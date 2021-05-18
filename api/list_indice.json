@@ -1,0 +1,39 @@
+[
+
+    {
+        "name": "CAC 40",
+        "symbol": "XPAR:PX1",
+        "mic": "XPAR",
+        "ticker": "PX1",
+        "isin": "FR0003500008"
+    },
+    {
+        "name": "SBF 120",
+        "symbol": "XPAR:PX4",
+        "mic": "XPAR",
+        "ticker": "PX4",
+        "isin": "FR0003999481"
+    },
+    {
+        "name": "DAX PERFORMANCE-INDEX",
+        "symbol": "XETR:DAX",
+        "mic": "XETR",
+        "ticker": "DAX",
+        "isin": "DE0008469008"
+    },
+    {
+        "name": "Dow Jones Industrial Average",
+        "symbol": "XNYS:DJI",
+        "mic": "XNYS",
+        "ticker": "DJI",
+        "isin": "US2605661048"
+    },
+    {
+        "name": "NASDAQ 100",
+        "symbol": "XNAS:NDX",
+        "mic": "XNAS",
+        "ticker": "NDX",
+        "isin": "US6311011026"
+    }
+    
+]
