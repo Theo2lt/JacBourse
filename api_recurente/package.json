@@ -4,8 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start" : "nodemon app.js",
-    "udpate": "node update_list"
+    "start" : "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
