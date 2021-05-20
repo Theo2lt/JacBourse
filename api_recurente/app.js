@@ -97,6 +97,48 @@ app.get('/api/v1/action_tickers' , (req,res) => {
         }
 })
 
+app.get('/api/v1/action_composants' , (req ,res) => {    
+    if ( req.query.symbol == undefined  &&  req.query.name_market == undefined  &&  req.query.id_isin == undefined ) {
+        
+        req_sql = 'select name , name_market , id_isin , symbol , mic ,ticker  from action_composants INNER JOIN  action_tickers ON action_composants.id_isin = action_tickers.isin;'
+
+        bdd.query(req_sql, function (err ,result){
+            if (err) throw err;
+            res.json(success(result))
+        })
+    }else if (req.query.symbol != undefined  ||  req.query.name_market != undefined  ||  req.query.id_isin != undefined){
+        
+        var req_sql = "select name , name_market , id_isin , symbol , mic ,ticker  from action_composants INNER JOIN  action_tickers ON action_composants.id_isin = action_tickers.isin where"
+            
+        if(req.query.symbol != undefined ){ 
+            req_sql += ` symbol = "${req.query.symbol}"   && `}
+        else{ 
+            req_sql += ` symbol  IS NOT NULL && `}
+
+        if(req.query.name_market != undefined ){ 
+            req_sql += ` name_market = "${req.query.name_market}"   && `}
+        else{ 
+            req_sql += ` name_market  IS NOT NULL && `}
+
+        if(req.query.id_isin != undefined ){ 
+            req_sql += ` id_isin = "${req.query.id_isin}" ;`}
+        else{ 
+            req_sql += ` id_isin  IS NOT NULL  ;`}
+
+        //console.log(req_sql)
+        bdd.query(mysql.format(req_sql), function (err, results, fields) {
+            if (err){console.log("err")
+                }
+            if (results.length === 0){
+                res.json(error("Erreur : paramètre "))
+            }else{
+                res.json(success(results))
+            }
+            
+          });
+    }
+})
+
 app.get('/api/v1/action_values' , (req,res) =>{
 
     if (req.query.symbol == undefined || req.query.symbol == "" ){
@@ -154,47 +196,7 @@ app.get('/api/v1/action_values' , (req,res) =>{
 
 })
 
-app.get('/api/v1/action_composants' , (req ,res) => {    
-    if ( req.query.symbol == undefined  &&  req.query.name_market == undefined  &&  req.query.id_isin == undefined ) {
-        
-        req_sql = 'select name , name_market , id_isin , symbol , mic ,ticker  from action_composants INNER JOIN  action_tickers ON action_composants.id_isin = action_tickers.isin;'
 
-        bdd.query(req_sql, function (err ,result){
-            if (err) throw err;
-            res.json(success(result))
-        })
-    }else if (req.query.symbol != undefined  ||  req.query.name_market != undefined  ||  req.query.id_isin != undefined){
-        
-        var req_sql = "select name , name_market , id_isin , symbol , mic ,ticker  from action_composants INNER JOIN  action_tickers ON action_composants.id_isin = action_tickers.isin where"
-            
-        if(req.query.symbol != undefined ){ 
-            req_sql += ` symbol = "${req.query.symbol}"   && `}
-        else{ 
-            req_sql += ` symbol  IS NOT NULL && `}
-
-        if(req.query.name_market != undefined ){ 
-            req_sql += ` name_market = "${req.query.name_market}"   && `}
-        else{ 
-            req_sql += ` name_market  IS NOT NULL && `}
-
-        if(req.query.id_isin != undefined ){ 
-            req_sql += ` id_isin = "${req.query.id_isin}" ;`}
-        else{ 
-            req_sql += ` id_isin  IS NOT NULL  ;`}
-
-        //console.log(req_sql)
-        bdd.query(mysql.format(req_sql), function (err, results, fields) {
-            if (err){console.log("err")
-                }
-            if (results.length === 0){
-                res.json(error("Erreur : paramètre "))
-            }else{
-                res.json(success(results))
-            }
-            
-          });
-    }
-})
 
         // ==================================================================================== //
                                        //  MIDDLEWARE CRYPTOS //
