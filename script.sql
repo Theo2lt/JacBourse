@@ -9,7 +9,7 @@ use bourse;
 #Prend la syntaxe :
 
 CREATE USER 'adminDB_JACQUARD'@'%' IDENTIFIED BY 'zz42988';
-CREATE USER 'api'@'%' IDENTIFIED BY '123456789'; 
+CREATE USER 'api'@'%' IDENTIFIED BY 'Bourse75'; 
 
 
 #ACCES AUX PRIVILEGES
